@@ -19,12 +19,13 @@
 CREATE DATABASE IF NOT EXISTS `dummy` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `dummy`;
 
--- Dumping structure for table dummy.gen_table
-CREATE TABLE IF NOT EXISTS `gen_table` (
-  `entry` text
+-- Dumping structure for table dummy.posts
+CREATE TABLE IF NOT EXISTS `posts` (
+  `data` text,
+  `time` text,
+  `post_read` text
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Data exporting was unselected.
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
