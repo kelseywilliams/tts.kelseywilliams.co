@@ -56,8 +56,6 @@ services:
     # Builds image from mysql image
     image: mysql
 
-    # Set container name
-    container_name: db
     # Initialize environment variables
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "true"
@@ -80,8 +78,6 @@ services:
     # Build seeder image from dockerfile in ./seeder
     build: ./seeder 
 
-    # Set container name
-    container_name: seeder
     # if db service is healthy, start db_seeder service
     depends_on:
       db:
@@ -90,9 +86,6 @@ services:
   backup:
     # Image for a cron daemon that will run parallel to web and db containers
     build: ./backup
-
-    # Set container name
-    container_name: backup
 
     # Map backup to db backup
     volumes:
