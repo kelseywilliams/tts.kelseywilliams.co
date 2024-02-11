@@ -26,7 +26,7 @@ COPY ./site/. /var/www/html/.
 RUN docker-php-ext-install mysqli
 
 # Enable kelseywilliams.co configuration
-RUN a2ensite kelseywilliams.co
+RUN a2ensite tts.kelseywilliams.co
 
 # Enable apache rewrite mod
 RUN a2enmod rewrite
