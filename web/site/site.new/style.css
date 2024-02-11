@@ -1,0 +1,47 @@
+body{
+    background-color: black;
+    word-wrap:break-word;
+}
+.msg, .time{
+    color: white;
+    font-family: monospace;
+    font-size: 25px;
+}
+.msg{
+    background-color: gray;
+    margin: 10px;
+    margin-top: 0;
+    padding: 2px;
+}
+.time{
+    padding-left: 10px;
+}
+.container{
+    border: 1px solid white;
+    margin: 10px;
+}
+/*Shamless css stealing*/
+.submit {
+    background-color: slategray;
+    border-radius: 1px;
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+    font-family: monospace;
+    font-size: 20px;
+    padding: 11px 23px;
+    text-decoration: none;
+    vertical-align:bottom;
+    margin: 10px;
+}
+.submit:hover {
+    background-color:#314b6b;
+}
+.submit:active {
+    position:relative;
+    top:1px;
+}
+.data{
+    vertical-align: middle;
+    margin: 10px;
+    width: 93%;
+}
