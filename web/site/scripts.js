@@ -31,6 +31,7 @@ function insertData(uri){
           data = text;
         })
         .then(function(){
+            console.log(data);
             data = JSON.parse(data);
 
             var fragment = new DocumentFragment();

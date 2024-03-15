@@ -36,5 +36,7 @@ $stmt->execute();
 $stmt->close();
 
 $_SESSION["success"] = "Post successfully created!";
-header("Location: /", 301);
+//header("Location: /", 301);
+echo $stmt->print();
+echo "Here";
 ?>

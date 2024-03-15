@@ -32,27 +32,27 @@ services:
   #     cap_add:
   #       - NET_ADMIN # For Fail2Ban to work
   #       - SYS_PTRACE
-  web:
+  tts-web:
     # Builds web service image from docker file in ./web
     build: ./web
 
-    # Set container name
-    container_name: web
 
     # Map apache logs to apache_logs volume
     volumes:
-      - apache_logs:/var/log/apache2
+      - /etc/ssl/certs/:/etc/ssl/certs/
+
+    networks:
+      - site
     # maps host port 8080 to container port 8080
     ports:
-      - "80:80"
-      - "443:443"
+      - "1027:1027"
 
     healthcheck:
-      test:  ["CMD", "curl", "-f", "https://kelseywilliams.co"]
+      test:  ["CMD", "curl", "-f", "https://tts-web:1027"]
       interval: 10s
       timeout: 1s
 
-  db:
+  tts-db:
     # Builds image from mysql image
     image: mysql
 
@@ -63,12 +63,13 @@ services:
     # Restart on failure of mysql daemon
     restart: always
     # Map host port 3306 to container port 3306
+    networks:
+      - site
     ports:
-      - "3306:3306"
-      - "33060:33060"
+      - "2003:3306"
     # Test mysql server is healthy with ping
     healthcheck:
-      test: mysql -u root -h db -e '\q' || exit 1
+      test: mysql -u root -h tts-db -e '\q' || exit 1
       interval: 2s
       timeout: 1s
       retries: 30
@@ -78,14 +79,20 @@ services:
     # Build seeder image from dockerfile in ./seeder
     build: ./seeder 
 
+    networks:
+      - site
+
     # if db service is healthy, start db_seeder service
     depends_on:
-      db:
+      tts-db:
         condition: service_healthy
 
   backup:
     # Image for a cron daemon that will run parallel to web and db containers
     build: ./backup
+
+    networks:
+      - site
 
     # Map backup to db backup
     volumes:
@@ -97,7 +104,9 @@ services:
     # Allow access to terminal
     #tty: true
 
-
+networks:
+  site:
+    external: true
 
 # Volume to hold history/legacy data 
 volumes:
